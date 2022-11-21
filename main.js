@@ -13,6 +13,10 @@ const shopCar = document.querySelector('.navbar-shopping-cart');
 const shoppingCartContainer = document.querySelector('.product-detail');
 shopCar.addEventListener('click',showDetailProduct);
 
+// mostrar productos  
+const containerCards = document.querySelector('.cards-container');
+
+
 // funcion del bloque 1
 function showDesktopMenu(){
     desktopMenu.classList.toggle('inactive');
@@ -34,3 +38,31 @@ function showDetailProduct(){
     mobileMenu.classList.toggle('inactive',true);
     shoppingCartContainer.classList.toggle('inactive');
 }
+
+let descripProductos = [];
+for (let index = 0; index < imagenes.length; index++) {
+    let objeto = {imagen: imagenes[index],
+                  price:prices[index],
+                  tipo: tipos[index]}
+    descripProductos.push(objeto);    
+}
+let serieClase = 1;
+function showProducts(){
+    descripProductos.forEach(element => {
+    let cardProduct = `<div class="product-card card-${serieClase}">
+                        <img src="${element.imagen}" alt="">
+                        <div class="product-info">
+                        <div>
+                            <p>$ ${element.price},00</p>
+                            <p>${element.tipo}</p>
+                        </div>
+                        <figure>
+                            <img src="./icons/bt_add_to_cart.svg" alt="">
+                        </figure>
+                        </div>
+                        </div>`;
+    containerCards.innerHTML += cardProduct;
+    serieClase++;
+});
+}
+showProducts();
